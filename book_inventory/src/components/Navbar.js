@@ -1,6 +1,5 @@
 import React from "react"
 import './Navbar.css'
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 function NavBar() {
   return (
@@ -13,7 +12,6 @@ function NavBar() {
               <a href="/catalog">Catalog</a>
             </li>
             <li>
-              <AccountCircleIcon />
             </li>
           </ul>
           <form>
