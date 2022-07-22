@@ -46,11 +46,23 @@ app.get("/books", function(req, res){
     return res.json(books);
 })
 
+//Add book to list by passing all parameters
 app.post("/books", function(req,res){
     let newBook = req.body
     console.log(newBook)
     books.push(newBook)
     res.json(newBook) 
+})
+
+app.delete("/books", function(req,res){
+    let deleteId = req.body.id
+    for(let i = 0; i < books.length; i++){
+        if(deleteId == books[i].id){
+            books.splice(i ,1)
+            return res.send(`Book deleted correctly`)
+        }
+    }
+    return res.send(`Book with id: ${deleteId}  was not found`)
 })
 
 //Return info about specific book based on id, if not available return error message
