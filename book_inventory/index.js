@@ -47,7 +47,10 @@ app.get("/books", function(req, res){
 })
 
 app.post("/books", function(req,res){
-    res.send("Add book function")
+    let newBook = req.body
+    console.log(newBook)
+    books.push(newBook)
+    res.json(newBook) 
 })
 
 //Return info about specific book based on id, if not available return error message
