@@ -49,11 +49,11 @@ app.get("/books", function(req, res){
 //Add book to list by passing all parameters
 app.post("/books", function(req,res){
     let newBook = req.body
-    console.log(newBook)
     books.push(newBook)
     res.json(newBook) 
 })
 
+//Delete book based on ID
 app.delete("/books", function(req,res){
     let deleteId = req.body.id
     for(let i = 0; i < books.length; i++){
@@ -63,6 +63,19 @@ app.delete("/books", function(req,res){
         }
     }
     return res.send(`Book with id: ${deleteId}  was not found`)
+})
+
+//Edit information for a certain book based on Id
+app.patch("/books", function(req,res){
+    let editBook = req.body
+    let bookId = req.body.id
+    for(let i = 0; i < books.length; i++){
+        if(bookId == books[i].id){
+            books[i] = editBook
+            return res.send(`Book edited correctly`)
+        }
+    }
+    return res.send(`Unable to find book with id:${bookId}`)
 })
 
 //Return info about specific book based on id, if not available return error message
