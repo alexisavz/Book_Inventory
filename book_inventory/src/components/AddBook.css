@@ -47,12 +47,11 @@ select {
 .form {
     padding: 15px;
     padding-top: 0px;
-    padding-bottom: 0px;
+    padding-bottom: 10px;
 }
 
 .footer {
-    padding: 10px;
-    padding-top: 5px;
+    padding: 20px;
     display: flex;
     justify-content: space-evenly;
 }

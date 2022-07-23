@@ -44,15 +44,13 @@ function AddBook() {
                 </select>
             </div> 
             <div>
-                <label className="titulos_formulario" for="ind">ID:</label>
-                <input type="text" className="form-control" id="ind" placeholder="Ingresa id del libro" />
-            </div> 
-            <div>
                 <label className="titulos_formulario" for="editorial">Editorial:</label>
                 <input type="text" className="form-control" id="editorial" placeholder="Ingresa la editorial del libro" />
             </div>
-                <label className="titulos_formulario" for="myfile">Seleccionar Imagen:</label>
-                <input type="file" id="myfile" className="form-control" name="myfile" /><br/>
+            <div>
+                <label className="titulos_formulario" for="imagen">Imagen:</label>
+                <input type="text" className="form-control" id="imagen" placeholder="Ingresa url de la imagen" />
+            </div> 
             </div>
         </form>
         <div className='footer'>
