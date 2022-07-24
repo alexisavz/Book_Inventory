@@ -1,16 +1,13 @@
 import React from 'react'
 
-const Book =(props) => {    
-  return(
-  <div>
-    <p>{props.index}</p>
-    <h1>{props.title}</h1>
-    <p>{props.author}</p>
-    <p>{props.gender}</p>
-    <p>{props.editorial}</p> 
-    <imag src={props.img} />
-  </div>
-  )
-}
-
-export default Book
+const Book =({index, title, author, gender, editorial, img} ) => (
+    <tr>
+    <th scope="row">{index+1}</th>
+    <td>{title}</td>
+    <td>{author}</td>
+    <td>{gender}</td>
+    <td>{editorial}</td>
+    <td>{img}</td>
+  </tr>
+);
+export default Book;
