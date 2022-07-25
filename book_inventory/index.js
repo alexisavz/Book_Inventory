@@ -1,35 +1,28 @@
+//Dependencias
+//----------------------------------------------------------------------------------------
 const express = require("express")
 const app = express();
+const dotenv = require("dotenv")
+const mogoose = require("mongoose")
 
-const PORT = 4000 
+const Catalog = require("./model/catalog");
+const { default: mongoose } = require("mongoose");
+
+dotenv.config()
+const PORT = process.env.PORT || 4000
+
+mongoose.connect(process.env.MONGODB_HOST, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+}).then(db => console.log('db connected'))
+.catch(err => console.log(err))
 
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
-var books = [
-    {
-        id: 1,
-        title: "Project Hail Mary",
-        author: "Andy Weir",
-        editorial: "Penguin",
-        genre: "Sci-Fi"
-    },
-    {
-        id: 2,
-        title: "The Silmarillion",
-        author: "J.R.R. Tolkien",
-        editorial: "Harper Collins",
-        genre: "Fantasy"
-    },
-    {
-        id: 3,
-        title: "Later",
-        author: "Stephen King",
-        editorial: "Titan Books",
-        genre: "Thriller"
-    },
-]
 
+//API CALLS
+//----------------------------------------------------------------------------------------------------------------
 
 //API Welcome call
 app.get("/",(rec,res) =>{
@@ -38,55 +31,67 @@ app.get("/",(rec,res) =>{
 
 //Returns more info about API
 app.get("/about",(rec,res) =>{
-    res.send("Aqui Se enviara mas informacion sobre la API")
+    res.send(`This API will be used to send, retrieve, modify, and delete data about the book catalogue <br> <br>
+    These are the following functions:<br>
+    GET() to /books: will retrieve a list of all available books on the catalogue<br>
+    GET to /books:{id} : Will search for a specific book based on ID
+    PUT(Object) to /books: will add a new book to the catalog, provided the data is added in the correct order<br>
+    DELETE(ID) to /books: Will find a book based on its id, when it finds one, it removes it from the catalog<br>
+    PUT(Object) to /books: Will search a book based on its id, and update its data with the one on the object`)
 })
 
 //Return a list of all current books
-app.get("/books", function(req, res){
+app.get("/books", async function(req, res){
+    const books = await Catalog.find()
     return res.json(books);
 })
 
 //Add book to list by passing all parameters
-app.post("/books", function(req,res){
+app.post("/books", async function(req,res){
     let newBook = req.body
-    books.push(newBook)
-    res.json(newBook) 
+    const book = new Catalog(newBook)
+    try{
+        await book.save()
+        res.json(newBook) 
+    } catch(err){
+        console.log(err)
+    }
+
 })
 
 //Delete book based on ID
-app.delete("/books", function(req,res){
+app.delete("/books", async function(req,res){
     let deleteId = req.body.id
-    for(let i = 0; i < books.length; i++){
-        if(deleteId == books[i].id){
-            books.splice(i ,1)
-            return res.send(`Book deleted correctly`)
-        }
+    try{
+        await Catalog.findByIdAndDelete(deleteId)
+        res.json(`Book Deleted Correctly`)
+    }catch{
+        return res.send(`Book with id: ${deleteId}  was not found`)
     }
-    return res.send(`Book with id: ${deleteId}  was not found`)
 })
 
 //Edit information for a certain book based on Id
-app.patch("/books", function(req,res){
+app.put("/books", async function(req,res){
     let editBook = req.body
     let bookId = req.body.id
-    for(let i = 0; i < books.length; i++){
-        if(bookId == books[i].id){
-            books[i] = editBook
-            return res.send(`Book edited correctly`)
-        }
+    delete editBook.id
+    try{
+        await Catalog.findByIdAndUpdate(bookId, editBook)
+        return res.send(`Book Edited Correctly`)
+    } catch(err){
+        return res.send(`Unable to find book with id:${bookId}`)
     }
-    return res.send(`Unable to find book with id:${bookId}`)
 })
 
 //Return info about specific book based on id, if not available return error message
-app.get("/books/:id", function(req, res){
+app.get("/books/:id", async function(req, res){
     let bookId = req.params.id;
-    for(let i =0; i< books.length; i++){
-        if(bookId == books[i].id){
-            return res.json(books[i])
-        }
+    const book = await Catalog.findById(bookId)
+    if(book){
+        return res.json(book)
+    } else {
+        return res.json({msg: "No hay libros asignados a ese ID"})
     }
-    return res.send(`No info about book ${bookId}`)
 })
 
 //Listen function for the API
