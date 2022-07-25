@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from "react";
-import Navbar from "./Navbar";
+import Navbar from "./Navbar"
 import axiosBook from "../Config/axiosBook";
 import Book from "./Book";
+import "../../node_modules/bootstrap/dist/css/bootstrap.min.css"
+
 
 
 const Catalog = () => {
 
-  <Navbar/>
     //catalog: State
     //setCatalog: Función para actualizar catalogo
     const [catalog, setCatalog] = useState([]);
@@ -20,7 +21,7 @@ const Catalog = () => {
 
     useEffect(() => {
         getCatalog();
-    },[]);
+    }, []);
 
     const renderCatalog = () =>{
       return (
@@ -41,8 +42,9 @@ const Catalog = () => {
         </tbody>
       );
     };
-
   return (
+    <div>
+    <Navbar/>
     <table className="table table-striped">
       <thead>
         <tr>
@@ -56,6 +58,7 @@ const Catalog = () => {
       </thead>
       {renderCatalog()}
     </table>
+    </div>
   );  
 };
 
