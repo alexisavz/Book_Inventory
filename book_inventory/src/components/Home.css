@@ -2,3 +2,43 @@
     margin-top: 0;
     padding-top: 0;
 }
+
+.titulo_principal {
+    color: #3A5A40;
+    text-align: center;
+    padding: 20px;
+    size: 40px;
+    font-size: 60px;
+    background-color: #DAD7CD;
+}
+
+.body_home {
+    background-color: #DAD7CD;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.carousel {
+    display: flex;
+    justify-content: center;
+    padding-left: 60px;
+    padding-right: 60px;
+
+    width: 30%;
+}
+
+.cita {
+    font-family: cursive;
+    color: #264d2d;
+    text-align: right;
+    font-size: 30px;
+    padding-right: 40px;
+}
+
+.elementos {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 65px;
+}
