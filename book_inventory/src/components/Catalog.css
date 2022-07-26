@@ -1,0 +1,13 @@
+.body{
+    background-color: #DAD7CD;
+    height: 100%;
+    width: 100%;
+}
+
+.action-buttons{
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 15px;
+}

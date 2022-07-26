@@ -13,7 +13,7 @@ function AddBook() {
 
   return (
     <div>
-      <button  onClick={handleShow}>
+      <button className="add-button" onClick={handleShow}>
         Añadir
       </button>
 

@@ -13,7 +13,7 @@ function EditBook() {
 
   return (
     <div>
-      <button  onClick={handleShow}>
+      <button className='edit-button'  onClick={handleShow}>
         Editar
       </button>
 
