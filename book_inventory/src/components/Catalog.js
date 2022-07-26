@@ -3,7 +3,7 @@ import Navbar from "./Navbar"
 import axiosBook from "../Config/axiosBook";
 import Book from "./Book";
 import "../../node_modules/bootstrap/dist/css/bootstrap.min.css"
-
+import Buscador from "./Buscador";
 
 
 const Catalog = () => {
@@ -45,6 +45,7 @@ const Catalog = () => {
   return (
     <div>
     <Navbar/>
+    <Buscador/>
     <table className="table table-striped">
       <thead>
         <tr>
