@@ -1,0 +1,15 @@
+.image{
+    width: 160px;
+    height: 225px;
+}
+
+.book-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.title{
+    width: 243px;
+    justify-content: center;
+}

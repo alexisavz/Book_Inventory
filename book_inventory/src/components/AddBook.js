@@ -5,7 +5,7 @@ import Modal from "react-bootstrap/Modal";
 //insalar:  npm i react-bootstrap bootstrap
 const axios = require("axios").default;
 
-function AddBook() {
+function AddBook(props) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -29,6 +29,8 @@ function AddBook() {
         genre: bookGenre
       })
       .then(function (response) {     //If petition succedes, proceed
+
+        props.agregar(response.data)
       })
       .catch(function (error) {       //If petition fails, alert error
         alert(error);

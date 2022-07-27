@@ -36,11 +36,11 @@ app.get("/",(rec,res) =>{
 app.get("/about",(rec,res) =>{
     res.send(`This API will be used to send, retrieve, modify, and delete data about the book catalogue <br> <br>
     These are the following functions:<br>
-    GET() to /books: will retrieve a list of all available books on the catalogue<br>
-    GET to /books:{id} : Will search for a specific book based on ID
-    PUT(Object) to /books: will add a new book to the catalog, provided the data is added in the correct order<br>
-    DELETE(ID) to /books: Will find a book based on its id, when it finds one, it removes it from the catalog<br>
-    PUT(Object) to /books: Will search a book based on its id, and update its data with the one on the object`)
+    GET to /books will retrieve a list of all available books on the catalogue<br>
+    GET to /books/:{id} Will search for a specific book based on ID<br>
+    PUT(Object) to /books will add a new book to the catalog, provided the data is added in the correct order<br>
+    DELETE(ID) to /books Will find a book based on its id, when it finds one, it removes it from the catalog<br>
+    PUT(Object) to /books Will search a book based on its id, and update its data with the one on the object`)
 })
 
 //Return a list of all current books
@@ -64,7 +64,7 @@ app.post("/books", async function(req,res){
 })
 
 //Delete book based on ID
-app.delete("/books", async function(req,res){
+app.post("/books/delete", async function(req,res){
     let deleteId = req.body.id
     try{
         await Catalog.findByIdAndDelete(deleteId)
