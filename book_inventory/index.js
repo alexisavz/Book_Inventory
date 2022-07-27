@@ -12,7 +12,7 @@ const Catalog = require("./model/catalog");
 const { default: mongoose } = require("mongoose");
 
 dotenv.config()
-const PORT = process.env.PORT || 5000
+const bPORT = process.env.bPORT || 5000
 
 mongoose.connect(process.env.MONGODB_HOST, {
     useNewUrlParser: true,
@@ -99,7 +99,7 @@ app.get("/books/:id", async function(req, res){
 })
 
 //Listen function for the API
-app.listen(PORT, () => {
-    console.log(`App listening on port ${PORT}`)
+app.listen(bPORT, () => {
+    console.log(`App listening on port ${bPORT}`)
   })
 
