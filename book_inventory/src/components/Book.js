@@ -2,17 +2,18 @@ import axios from "axios";
 import React from "react";
 import "./Book.css";
 
-const deleteBook = (id) => {
+const deleteBook = (id,key) => {
   axios.post("http://localhost:5000/books/delete", { id: id })
     .then((res) => {
       alert("book deleted")
+      props.del(key)
     })
     .catch((err) => {
       console.log(err);
     });
 };
 
-const Book = ({ id, index, title, author, genre, editorial, img }) => (
+const Book = (props, { id, index, title, author, genre, editorial, img }) => (
   <tr>
     <th scope="row">{index + 1}</th>
     <td>
@@ -25,7 +26,7 @@ const Book = ({ id, index, title, author, genre, editorial, img }) => (
     <td>{editorial}</td>
     <td>
       {" "}
-      <button onClick={() => deleteBook(id)}>BORRAR</button>{" "}
+      <button onClick={() => deleteBook(id, index)}>BORRAR</button>{" "}
     </td>
   </tr>
 );
