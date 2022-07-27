@@ -4,12 +4,15 @@ const express = require("express")
 const app = express();
 const dotenv = require("dotenv")
 const mogoose = require("mongoose")
+var cors = require("cors")
+app.use(cors());
+
 
 const Catalog = require("./model/catalog");
 const { default: mongoose } = require("mongoose");
 
 dotenv.config()
-const PORT = process.env.PORT || 4000
+const PORT = process.env.PORT || 5000
 
 mongoose.connect(process.env.MONGODB_HOST, {
     useNewUrlParser: true,
@@ -49,6 +52,7 @@ app.get("/books", async function(req, res){
 //Add book to list by passing all parameters
 app.post("/books", async function(req,res){
     let newBook = req.body
+    console.log(req.body)
     const book = new Catalog(newBook)
     try{
         await book.save()
