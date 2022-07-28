@@ -29,14 +29,6 @@ const Catalog = () => {
     setCatalog((prev) => [...prev,book])
   }
 
-  const delBook = (key) =>{
-    setCatalog((prev) => {
-      delete prev[key-1]
-    })
-  }
-
-
-
   const renderCatalog = () => {
     return (
       <tbody>
@@ -50,7 +42,7 @@ const Catalog = () => {
             genre={catalog.genre}
             editorial={catalog.editorial}
             img={libro1}
-            del={delBook}
+            onClick={<EditBook/>}
           />
         ))}
       </tbody>
